@@ -212,6 +212,7 @@ export function Inicio() {
 
 ```
 ### Home 
+This file is the one that is loaded once the user logs in, it contains a navigation bar with an item called Home and a drop-down menu on the left with the user's name and their photo, when clicking on it displays and there are 2 options ,logout(ends the current session) and profile(takes you to the user's profile page)
 ```js
 import { useAuth } from "../context/authContext";
 import { Fragment } from "react";
@@ -378,6 +379,7 @@ export function Home() {
 ```
 
 ### Registro 
+This file allows the creation of new users, this functionality is provided by Firebase through a function, we just need to import this function from the authContext file and assign this function to our button to create the new user
 ```js 
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
@@ -467,6 +469,8 @@ export function Registro() {
 ```
 
 ### Login 
+This file allows user authentication, we instantiate the necessary functions to achieve this functionality that we have created in the authContext.js file and we render the interface for the user to enter an email and password or log in with a google account.
+All this functionality is provided by Firebase through functions already created, we import them from the authContext file and assign them to the correct elements
 ```js 
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
@@ -1172,4 +1176,4 @@ to run our server : npm start
 
 ### Live Demo
 
-![caption](https://github.com/DevelopTomassm/DevelopTomassm/blob/main/video1924679795.gif)
+![caption](https://github.com/DevelopTomassm/DevelopTomassm/blob/main/video1117522395.gif)
