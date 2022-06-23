@@ -82,6 +82,72 @@ Click here for create account(https://firebase.google.com/)
 ![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/FirebaseLogin.JPG)
 
 
+#### Click on start to create a project
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/FirebaseInit.JPG)
+
+
+#### Once you are logged into firebase, create a project
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/CreateProject.JPG)
+
+
+
+#### Assign a name to the project, accept the conditions and click continue
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/CreateP2.JPG)
+
+
+#### Enable Google Analytics
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/CreateP3.JPG)
+This option is optional, you can choose if you are going to use google analytics or not, this can be configured later, we are going to enable it
+
+
+#### Config Google Analytics
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/CreateP4.JPG)
+
+Here we will configure google analitycs, if it is the first time you have created a firebase project, you will have to create an account choosing the area you are in, if you have created more projects this step will not work
+
+
+#### Connect Your Project With Firebase
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/FirebaseConnect.JPG)
+
+Here we will connect our application to firebase, we will have to choose if it will be a web application, android or ios, it can also be linked with unity and flutter
+
+
+#### Register App
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/RegistrarApp.JPG)
+
+Here we will have to choose a name with which we will register our application
+
+#### Add Firebase SDK
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/Fconect.JPG)
+
+Here we will have to copy the code fragment provided by firebase to implement it in our project and connect to our database
+
+
+#### Autentication Users
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/Autentication.JPG)
+
+We go to User Authentication to enable users to be created so that they can log in to the application
+
+
+#### Sigin Method Autentication User
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/Auth.JPG)
+
+Here we will choose the method by which users can authenticate, in our case we will use authentication with email and password and google
+
+
+#### Enable Authentication With Email And Password
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/EmailPass.JPG)
+
+Here we enable users to be authenticated with email and password
+
+
+#### Enable Authentication With Google
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/Google.JPG)
+
+Here we enable users to be authenticated with google
+
+
+
 #### To run this app in your pc
 - [Download Node](https://nodejs.org/en/)
 - [Download MongoDb](https://www.mongodb.com/try/download/community)
