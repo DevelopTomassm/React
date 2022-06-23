@@ -72,7 +72,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 # To implement firebase in your project
-First log in to your firebase account or else create one(https://firebase.google.com/)
+First log in to your firebase account or else create one.
+Click here for create account(https://firebase.google.com/)
 
 
 ![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/FirebaseCreateAccount.JPG)
