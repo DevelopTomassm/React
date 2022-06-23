@@ -757,7 +757,7 @@ This file allows us to update the user data, change the name (if this property d
 The functionality is provided to us by Firebase through data update functions.
 Here I leave the link of the Firebase documentation in case you want to take a look
 
-(https://firebase.google.com/docs/auth/web/manage-users?hl=es#web-version-9_3)
+[Firebase](https://firebase.google.com/docs/auth/web/manage-users?hl=es#web-version-9_3)
 ```js
 import { useAuth } from "../context/authContext";
 import { updateProfile, updateEmail } from "firebase/auth";
