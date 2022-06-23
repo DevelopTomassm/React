@@ -1,8 +1,14 @@
 import { useAuth } from "../context/authContext";
-
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 export function Home() {
   const { user, logout, loading } = useAuth();
   console.log(user);
+  const navigation = [{ name: "Home", href: "/inicio", current: false }];
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
   const handleLogout = async () => {
     try {
       await logout();
@@ -13,50 +19,143 @@ export function Home() {
 
   if (loading) return <div> Cargando... </div>;
   return (
-    <div class="flex items-center h-screen w-full justify-center">
-      <div class="max-w-xs">
-        <div class="bg-white shadow-xl rounded-lg py-3">
-          <div class="photo-wrapper p-2">
-            <img
-              class="w-32 h-32 rounded-full mx-auto"
-              src={user.photoURL || "default.png"}
-              alt="No se ha podido cargar la foto de perfil"
-            />
-          </div>
-          <div class="p-2">
-            <h3 class="text-center text-xl text-gray-900 font-medium leading-8">
-              {user.name || user.displayName || "El usuario no tiene nombre"}
-            </h3>
-            <div class="text-center text-gray-400 text-xs font-semibold">
-              <p>Creador de esta pagina</p>
-            </div>
-            <table class="text-xs my-3">
-              <tbody>
-                <tr>
-                  <td class="px-2 py-2 text-gray-500 font-semibold">Nombre</td>
-                  <td class="px-2 py-2">
-                    {user.displayName || "El usuario no tiene nombre"}
-                  </td>
-                </tr>
-                <tr>
-                  <td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
-                  <td class="px-2 py-2">{user.email}</td>
-                </tr>
-              </tbody>
-            </table>
+    <Disclosure as="nav" className="w-full bg-blue-200">
+      {({ open }) => (
+        <>
+          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="relative flex items-center justify-between h-16">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button*/}
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start mx-auto">
+                <div className="flex-shrink-0 flex items-center">
+                  <img
+                    className="block lg:hidden h-8 w-auto "
+                    src="icono.ico"
+                    alt="ETG"
+                  />
+                  <img
+                    className="hidden lg:block h-8 w-auto"
+                    src="icono.ico"
+                    alt="ETG"
+                  />
+                </div>
+                <div className="hidden sm:block sm:ml-6">
+                  <div className="flex space-x-4 ">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-black-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-            <div class="text-center my-3">
-              <a
-                class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium"
-                href="/#"
-                onClick={handleLogout}
-              >
-                Cerrar sesion
-              </a>
+              <div className="grid grid-cols-1">
+                <div className="order-1 col-span-1 pb-20 ">
+                  <div className="absolute inset-y-0 right-0 mx-auto  ">
+                    {/* Profile dropdown */}
+                    <Menu as="div" className=" mt-2 mx-auto ">
+                      <div>
+                        <Menu.Button className=" flex text-sm rounded-full    ">
+                          <span className="sr-only">Open user menu</span>
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={user.photoURL || "user.png"}
+                            alt=""
+                          />
+                          <span className="py-2 mx-2 text-bla">
+                            {user.displayName || user.email}
+                          </span>
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className=" right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 absolute  ">
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="/profile"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Perfil
+                              </a>
+                            )}
+                          </Menu.Item>
+
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="/#"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                                onClick={handleLogout}
+                              >
+                                Cerrar sesion
+                              </a>
+                            )}
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+
+          <Disclosure.Panel className="sm:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.name}
+                  as="a"
+                  href={item.href}
+                  className={classNames(
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
+                  )}
+                  aria-current={item.current ? "page" : undefined}
+                >
+                  {item.name}
+                </Disclosure.Button>
+              ))}
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
   );
 }

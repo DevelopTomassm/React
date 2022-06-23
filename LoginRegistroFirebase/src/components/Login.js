@@ -40,7 +40,7 @@ export function Login() {
   };
 
   return (
-    <div className="w-full max-w-xs m-auto ">
+    <div className="w-full max-w-sm m-auto ">
       <h1 className="text-center text-2xl font-bold mb-4"> Login </h1>{" "}
       {error && <Alert message={error} />}{" "}
       <form

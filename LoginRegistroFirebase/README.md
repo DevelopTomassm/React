@@ -149,13 +149,74 @@ Here we enable users to be authenticated with google
 
 # Code Explanation
 ## Components
+### Inicio
+```js
+import { useAuth } from "../context/authContext";
+import { Home } from "./Home";
+
+export function Inicio() {
+  const { user } = useAuth();
+  console.log(user);
+
+  return (
+    <div className="w-full bg-blue-200">
+      <Home></Home>{" "}
+      <div class="flex items-center h-screen w-full justify-center">
+        <div class="max-w-xs">
+          <div class="bg-white shadow-xl rounded-lg py-3">
+            <div class="photo-wrapper p-2">
+              <img
+                class="w-32 h-32 rounded-full mx-auto"
+                src={user.photoURL || "default.png"}
+                alt="No se ha podido cargar la foto de perfil"
+              />
+            </div>
+            <div class="p-2">
+              <h3 class="text-center text-xl text-gray-900 font-medium leading-8">
+                {user.name || user.displayName || "El usuario no tiene nombre"}
+              </h3>
+              <div class="text-center text-gray-400 text-xs font-semibold">
+                <p>Creador de esta pagina</p>
+              </div>
+              <table class="text-xs my-3">
+                <tbody>
+                  <tr>
+                    <td class="px-2 py-2 text-gray-500 font-semibold">
+                      Nombre
+                    </td>
+                    <td class="px-2 py-2">
+                      {user.displayName || "El usuario no tiene nombre"}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
+                    <td class="px-2 py-2">{user.email}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+```
 ### Home 
 ```js
 import { useAuth } from "../context/authContext";
-
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 export function Home() {
   const { user, logout, loading } = useAuth();
   console.log(user);
+  const navigation = [{ name: "Home", href: "/inicio", current: false }];
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
   const handleLogout = async () => {
     try {
       await logout();
@@ -166,67 +227,906 @@ export function Home() {
 
   if (loading) return <div> Cargando... </div>;
   return (
-    <div class="flex items-center h-screen w-full justify-center">
-      <div class="max-w-xs">
-        <div class="bg-white shadow-xl rounded-lg py-3">
-          <div class="photo-wrapper p-2">
-            <img
-              class="w-32 h-32 rounded-full mx-auto"
-              src={user.photoURL || "default.png"}
-              alt="No se ha podido cargar la foto de perfil"
-            />
-          </div>
-          <div class="p-2">
-            <h3 class="text-center text-xl text-gray-900 font-medium leading-8">
-              {user.name || user.displayName || "El usuario no tiene nombre"}
-            </h3>
-            <div class="text-center text-gray-400 text-xs font-semibold">
-              <p>Creador de esta pagina</p>
-            </div>
-            <table class="text-xs my-3">
-              <tbody>
-                <tr>
-                  <td class="px-2 py-2 text-gray-500 font-semibold">Nombre</td>
-                  <td class="px-2 py-2">
-                    {user.displayName || "El usuario no tiene nombre"}
-                  </td>
-                </tr>
-                <tr>
-                  <td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
-                  <td class="px-2 py-2">{user.email}</td>
-                </tr>
-              </tbody>
-            </table>
+    <Disclosure as="nav" className="w-full bg-blue-200">
+      {({ open }) => (
+        <>
+          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="relative flex items-center justify-between h-16">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button*/}
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start mx-auto">
+                <div className="flex-shrink-0 flex items-center">
+                  <img
+                    className="block lg:hidden h-8 w-auto "
+                    src="icono.ico"
+                    alt="ETG"
+                  />
+                  <img
+                    className="hidden lg:block h-8 w-auto"
+                    src="icono.ico"
+                    alt="ETG"
+                  />
+                </div>
+                <div className="hidden sm:block sm:ml-6">
+                  <div className="flex space-x-4 ">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-black-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-            <div class="text-center my-3">
-              <a
-                class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium"
-                href="/#"
-                onClick={handleLogout}
-              >
-                Cerrar sesion
-              </a>
+              <div className="grid grid-cols-1">
+                <div className="order-1 col-span-1 pb-20 ">
+                  <div className="absolute inset-y-0 right-0 mx-auto  ">
+                    {/* Profile dropdown */}
+                    <Menu as="div" className=" mt-2 mx-auto ">
+                      <div>
+                        <Menu.Button className=" flex text-sm rounded-full    ">
+                          <span className="sr-only">Open user menu</span>
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={user.photoURL || "user.png"}
+                            alt=""
+                          />
+                          <span className="py-2 mx-2 text-bla">
+                            {user.displayName || user.email}
+                          </span>
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className=" right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 absolute  ">
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="/profile"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Perfil
+                              </a>
+                            )}
+                          </Menu.Item>
+
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="/#"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                                onClick={handleLogout}
+                              >
+                                Cerrar sesion
+                              </a>
+                            )}
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
+          <Disclosure.Panel className="sm:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.name}
+                  as="a"
+                  href={item.href}
+                  className={classNames(
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
+                  )}
+                  aria-current={item.current ? "page" : undefined}
+                >
+                  {item.name}
+                </Disclosure.Button>
+              ))}
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
+  );
+}
+
+```
+
+### Registro 
+```js 
+import { useState } from "react";
+import { useAuth } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
+import { Alert } from "./Alert";
+export function Registro() {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const { signup } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState();
+  const handleChange = ({ target: { name, value } }) => {
+    console.log(name, value);
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await signup(user.email, user.password);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
+
+  return (
+    <div className="w-full max-w-xs m-auto">
+      <h1 className="text-center text-2xl font-bold mb-4"> Registro </h1>{" "}
+      {error && <Alert message={error} />}{" "}
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      >
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="email"
+        >
+          Email{" "}
+        </label>{" "}
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />{" "}
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2 py-2"
+          htmlFor="password"
+        >
+          Contraseña{" "}
+        </label>{" "}
+        <input
+          type="password"
+          name="password"
+          placeholder="******"
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        />{" "}
+        <p className="text-center text-gray-500 text-xs pb-3">
+          {" "}
+          ¿ Ya tienes cuenta ?{" "}
+          <a href="/login" className="text-blue-500">
+            Iniciar sesion{" "}
+          </a>{" "}
+        </p>{" "}
+        <div className="flex items-center justify-center">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline "
+            type="submit"
+          >
+            Registrarse{" "}
+          </button>{" "}
         </div>
+      </form>{" "}
+    </div>
+  );
+}
+
+```
+
+### Login 
+```js 
+import { useState } from "react";
+import { useAuth } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
+import { Alert } from "./Alert";
+
+export function Login() {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const { login, loginWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState();
+
+  const handleChange = ({ target: { name, value } }) => {
+    console.log(name, value);
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await login(user.email, user.password);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
+  const handleLoginGoogle = async () => {
+    try {
+      await loginWithGoogle();
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  return (
+    <div className="w-full max-w-sm m-auto ">
+      <h1 className="text-center text-2xl font-bold mb-4"> Login </h1>{" "}
+      {error && <Alert message={error} />}{" "}
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      >
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="email"
+        >
+          Email{" "}
+        </label>{" "}
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />{" "}
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2 py-2"
+          htmlFor="password"
+        >
+          Contraseña{" "}
+        </label>{" "}
+        <input
+          type="password"
+          name="password"
+          placeholder="******"
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        />{" "}
+        <div className="flex items-center justify-between">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Iniciar sesion{" "}
+          </button>{" "}
+          <a
+            href="/resetPassword"
+            className="inline-block align-baseline font-bold text-sm text-blue-500 px-4"
+          >
+            {" "}
+            ¿ Has olividado la contraseña ?{" "}
+          </a>{" "}
+        </div>{" "}
+        <p className="text-center text-gray-500 text-xs pb-3 pt-6">
+          {" "}
+          ¿ No tienes cuenta ?{" "}
+          <a href="/registro" className="text-blue-500">
+            {" "}
+            Registrarse{" "}
+          </a>{" "}
+        </p>{" "}
+        <p className="text-center text-gray-500 text-xs pb-3 pt-2"> O</p>
+        <button
+          type="submit"
+          onClick={handleLoginGoogle}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded focus:outline-none focus:shadow-outline text-center w-full "
+        >
+          Iniciar sesion con google{" "}
+        </button>{" "}
+      </form>{" "}
+    </div>
+  );
+}
+
+```
+
+### ForgotPassword
+```js
+import { useState } from "react";
+import { useAuth } from "../context/authContext";
+
+import { Alert } from "./Alert";
+import { Fade } from "react-reveal";
+export function ResetPassword() {
+  const [user, setUser] = useState({
+    email: "",
+  });
+  const [error, setError] = useState();
+  const { resetPassword } = useAuth();
+
+  const handleChange = ({ target: { name, value } }) => {
+    console.log(name, value);
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await resetPassword(user.email);
+      setError("Check your email to reset your password");
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
+
+  return (
+    <section class="w-full gradient-form bg-gray-200 md:h-screen">
+      <div className="h-screen bg-blue-200">
+        <div class="container py-3   ml-auto mr-auto ">
+          <div class="flex justify-center flex-wrap h-full g-6 text-gray-800 ">
+            <div class="block bg-white shadow-lg rounded-lg ">
+              {" "}
+              <Fade bottom>
+                <div class="lg:flex lg:flex-wrap g-0">
+                  <div class="lg:w-6/12 px-4 md:px-0">
+                    <div class="md:p-12 md:mx-6 ">
+                      <div class="text-center ">
+                        <img
+                          class="w-48 animate-bounce"
+                          src="icono.png"
+                          alt="logo"
+                        />
+                        <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">
+                          RESTABLECER CONTRASEÑA
+                        </h4>{" "}
+                        {error && <Alert message={error} />}{" "}
+                      </div>
+
+                      <form onSubmit={handleResetPassword}>
+                        <div class="mb-4">
+                          <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                            htmlFor="email"
+                          >
+                            Email{" "}
+                          </label>{" "}
+                          <input
+                            type="email"
+                            name="email"
+                            class="shadow appearance-none border rounded w-full-screen-xl py-2  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            placeholder="Introduce tu email"
+                            onChange={handleChange}
+                          />
+                        </div>
+
+                        <div class="text-center pt-1 mb-12 pb-1">
+                          <button
+                            class=" text-black group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100 login"
+                            type="submit"
+                            data-mdb-ripple="true"
+                            data-mdb-ripple-color="light"
+                          >
+                            Restablecer contraseña
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </Fade>
+            </div>
+          </div>{" "}
+        </div>{" "}
+      </div>
+    </section>
+  );
+}
+```
+### Profile
+```js
+import { Home } from "./Home";
+import { useAuth } from "../context/authContext";
+import { Fade } from "react-reveal";
+export function Profile() {
+  const { user } = useAuth();
+  console.log(user);
+
+  return (
+    <div className="w-full bg-blue-200">
+      <Home />{" "}
+      <div class="max-w-screen-sm pb-5 mx-auto mt-4 overflow-hidden rounded-lg shadow-lg fondo">
+        <Fade left>
+          <div class="h-40 bg-gradient-to-br from-blue-400 via-indigo-500 fondo">
+            <div class="flex justify-center">
+              <span class="mt-10 text-xl font-extrabold text-white">
+                {user.displayName || user.email}
+              </span>
+            </div>
+            <div class="flex justify-center">
+              <img
+                class="object-cover w-24 h-24 mt-4 border-4 border-blue-600 rounded-full"
+                src={user.photoURL || "default.png"}
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="px-6 py-4">
+            <div class="flex justify-center mt-10 mb-4 text-xl font-medium">
+              Datos personales
+            </div>
+            <div class="flex my-1  text-black justify-center">
+              <img
+                class="object-cover w-8 h-8 mt-4 border-4 border-blue-600 rounded-full"
+                src="account.png"
+                alt=""
+              />
+              <span className="mx-5 py-4">
+                {user.displayName || user.email}
+              </span>
+            </div>
+
+            <div class="flex my-1 text-black justify-center">
+              <img
+                class="object-cover w-8 h-8 mt-4 border-4 border-blue-600 rounded-full"
+                src="email.png"
+                alt=""
+              />
+              <span className="mx-5 py-4">{user.email}</span>
+            </div>
+
+            <div class="flex my-1 mt-2 justify-center ">
+              <button
+                type="button"
+                class="inline-flex  px-6 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+              >
+                <a href="/editProfile" class="text-white">
+                  {" "}
+                  Editar perfil
+                </a>
+              </button>
+            </div>
+          </div>
+        </Fade>
       </div>
     </div>
   );
 }
 ```
+### EditProfile
+```js
+import { useAuth } from "../context/authContext";
+import { updateProfile, updateEmail } from "firebase/auth";
+import { Home } from "./Home";
+import { useState } from "react";
+import { storage } from "../config/firebase.config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { Fade } from "react-reveal";
+export function EditProfile() {
+  const { user } = useAuth();
+  console.log(user);
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [image, setImage] = useState();
+  const [url, setUrl] = useState();
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+  console.log(image);
 
-### Registro 
-### Login 
+  const handleSubmit = (e) => {
+    const imageRef = ref(storage, "image");
+    uploadBytes(imageRef, image)
+      .then(() => {
+        getDownloadURL(imageRef)
+          .then((url) => {
+            setUrl(url);
+          })
+          .catch((error) => {
+            console.log(error.message, "No se ha podido actualizar la foto");
+          });
+        setImage(null);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  updateProfile(user, {
+    displayName: name,
+    photoURL: url,
+  })
+    .then(() => {
+      // Profile updated!
+      // ...
+    })
+    .catch((error) => {
+      // An error occurred
+      // ...
+    });
+
+  updateEmail(user, email)
+    .then(() => {
+      // Email updated
+      // ...
+    })
+    .catch((error) => {
+      // An error occurred
+      // ...
+    });
+
+  return (
+    <div className="w-full bg-blue-200">
+      <Home />{" "}
+      <div class="max-w-sm pb-5 mx-auto mt-4 overflow-hidden rounded-lg shadow-lg fondo">
+        <Fade top>
+          <div class="h-40 bg-gradient-to-br from-blue-400 via-indigo-500 fondo">
+            <div class="flex justify-center">
+              <span class="mt-10 text-xl font-extrabold text-white">
+                {user.displayName || user.email}
+              </span>
+            </div>
+            <div class="w-full p-8 mx-2 flex justify-center">
+              <img
+                src={user.photoURL}
+                class="rounded-full w-32"
+                alt="Avatar"
+                onClick={handleImageChange}
+              />
+            </div>
+            <div class="w-full  mx-2 flex justify-center">
+              <input
+                type="file"
+                id="customFile"
+                name="file"
+                hidden=""
+                src={user.photoURL}
+                className=""
+                onChange={handleImageChange}
+              ></input>
+            </div>
+          </div>
+          <Fade left>
+            <div class="px-6 py-4">
+              <div class="flex justify-center mt-10 mb-4 text-xl font-medium">
+                Datos personales
+              </div>
+              <div class="flex my-1 ml-10 text-black mr-10">
+                <img
+                  class="object-cover w-8 h-8 mt-4 border-4 border-blue-600 rounded-full"
+                  src="account.png"
+                  alt=""
+                />
+                <span className="mx-5 py-4">
+                  <input
+                    id="username"
+                    class="border-1  rounded-r px-4 py-2 w-full"
+                    type="text"
+                    placeholder="Introduce el nombre nuevo"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </span>
+              </div>
+
+              <div class="flex my-1 ml-10 text-black mr-10">
+                <img
+                  class="object-cover w-8 h-8 mt-4 border-4 border-blue-600 rounded-full"
+                  src="email.png"
+                  alt=""
+                />
+                <span className="mx-5 py-4">
+                  <input
+                    id="email"
+                    class="border-1  rounded-r px-4 py-2 w-full"
+                    type="email"
+                    placeholder="Introduce el email nuevo"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </span>
+              </div>
+
+              <div class="flex my-1 mt-2 ml-32 ">
+                <button
+                  type="button"
+                  class="inline-flex items-center px-6 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+                  onClick={updateProfile && handleSubmit}
+                >
+                  Actualizar
+                </button>
+              </div>
+            </div>
+          </Fade>
+        </Fade>
+      </div>
+    </div>
+  );
+}
+```
 ### Alert
+```js 
+export function Alert({ message }) {
+  return (
+    <div className="bg-red-100 border-red-400 text-red-700 px-4 py-3 rounded relative mb-2 text-center">
+      <span className="sm: inline block"> {message} </span>
+    </div>
+  );
+}
+```
 ### ProtectedRoutes  
+```js 
+import { useAuth } from "../context/authContext";
+import { Navigate } from "react-router-dom";
+export function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
+  if (!user) return <Navigate to="/login" />;
+  if (loading) return <div> Cargando... </div>;
+  return <> {children} </>;
+}
+```
 ## Config
 ### firebase.config.js
+```js 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAHedvBUMNSJQulVNAj8BQnLufTeWyy4Ks",
+  authDomain: "loginregistro-e3b56.firebaseapp.com",
+  projectId: "loginregistro-e3b56",
+  storageBucket: "loginregistro-e3b56.appspot.com",
+  messagingSenderId: "1076610226563",
+  appId: "1:1076610226563:web:a24ca8e6d162eb5fcd3eb6",
+  measurementId: "G-2Q2BKNTG9R",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const storage = getStorage(app);
+export { app, analytics, auth, storage };
+
+```
 ## Context
 ### authContext.js
+```js 
+  import { createContext, useContext, useEffect } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+import { auth } from "../config/firebase.config";
+import { useState } from "react";
+export const authContext = createContext();
+export const useAuth = () => {
+  const context = useContext(authContext);
+  if (!context) {
+    throw new Error("No hay proveedor de autenticacion");
+  }
+
+  return context;
+};
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const signup = (email, password) =>
+    createUserWithEmailAndPassword(auth, email, password);
+
+  const login = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password);
+  const logout = () => signOut(auth);
+  const loginWithGoogle = () => {
+    const googleProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleProvider);
+  };
+  const resetPassword = (email) => sendPasswordResetEmail(auth, email);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+      console.log("auth provider load");
+    });
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <authContext.Provider
+      value={{
+        signup,
+        login,
+        user,
+        logout,
+        loading,
+        loginWithGoogle,
+        resetPassword,
+      }}
+    >
+      {" "}
+      {children}{" "}
+    </authContext.Provider>
+  );
+}
+
+```
 ## App.js
+```js
+import { Routes, Route } from "react-router-dom";
+import { Home } from "./components/Home";
+import { Login } from "./components/Login";
+import { Registro } from "./components/Registro";
+import { Profile } from "./components/Profile";
+import { EditProfile } from "./components/EditProfile";
+import { ResetPassword } from "./components/ForgotPassword";
+import { ProtectedRoute } from "./components/ProtectedRoutes";
+import { AuthProvider } from "./context/authContext";
+import { Inicio } from "./components/Inicio";
+
+function App() {
+  return (
+    <div className="bg-blue-300 h-screen text-black flex">
+      <AuthProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />{" "}
+          <Route path="/login" element={<Login />} />{" "}
+          <Route path="/registro" element={<Registro />} />{" "}
+          <Route path="/resetPassword" element={<ResetPassword />} />{" "}
+          <Route path="/profile" element={<Profile />} />{" "}
+          <Route path="/editProfile" element={<EditProfile />} />{" "}
+          <Route path="/inicio" element={<Inicio />} />{" "}
+        </Routes>{" "}
+      </AuthProvider>{" "}
+    </div>
+  );
+}
+
+export default App;
+```
 ## package.json
+```js 
+{
+  "name": "login-registro-firebase",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@headlessui/react": "^1.6.5",
+    "@heroicons/react": "^1.0.6",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "firebase": "^9.8.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-reveal": "^1.2.2",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.4"
+  }
+}
+
+```
 ## postcss.config.js
+```js 
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
 ## tailwind.config.js
+```js 
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+```
 
 
 
