@@ -71,10 +71,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 
-# flutter-nodejs-mongodb
-Let's integrate our back-end solution into flutter app
+# To implement firebase in your project
+First log in to your firebase account or else create one(https://firebase.google.com/)
 
-![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/Autentication.JPG)
+
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/FirebaseCreateAccount.JPG)
 
 #### To run this app in your pc
 - [Download Node](https://nodejs.org/en/)
