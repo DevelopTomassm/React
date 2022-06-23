@@ -147,6 +147,23 @@ Here we enable users to be authenticated with email and password
 Here we enable users to be authenticated with google
 
 
+# Code Explanation
+## Components
+### Home 
+### Registro 
+### Login 
+### Alert
+### ProtectedRoutes  
+## Config
+### firebase.config.js
+## Context
+### authContext.js
+## App.js
+## package.json
+## postcss.config.js
+## tailwind.config.js
+
+
 
 #### To run this app in your pc
 - [Download Node](https://nodejs.org/en/)<br><br>
