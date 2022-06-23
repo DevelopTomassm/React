@@ -150,6 +150,7 @@ Here we enable users to be authenticated with google
 # Code Explanation
 ## Components
 ### Home 
+```js
 import { useAuth } from "../context/authContext";
 
 export function Home() {
@@ -212,6 +213,7 @@ export function Home() {
     </div>
   );
 }
+```
 
 ### Registro 
 ### Login 
