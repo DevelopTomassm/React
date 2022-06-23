@@ -75,8 +75,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 First log in to your firebase account or else create one.
 Click here for create account(https://firebase.google.com/)
 
+![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/FirebaseLogin.JPG)
 
+#### Steps to follow
+##### Create account or sigin in firebase
 ![node](https://raw.githubusercontent.com/DevelopTomassm/capturas-readme/main/LoginRegistroFirebase/FirebaseCreateAccount.JPG)
+
 
 #### To run this app in your pc
 - [Download Node](https://nodejs.org/en/)
