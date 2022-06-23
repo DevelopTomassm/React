@@ -152,9 +152,9 @@ Here we enable users to be authenticated with google
 ### Inicio
 #### This class contains the necessary code to:
 ##### -Get the current user who is logged in
-dkn
+We obtain the user with a function that we have created in the authContext.js file, this function checks that the user is not null, if it is null we get an error that there is no authentication provider, if the user is not null the function returns us returns an object with the properties of the user, name, email, id....
 ##### -Show a letter with information of the current user
-jdbf
+We obtain the properties of the current user through the imported function called useAuth, once we obtain the entire user object it is easy to access its properties and thus be able to display them, we only have to implement bind functions to assign them the value of the user attribute that we want
 
 
 ```js
@@ -582,6 +582,9 @@ export function Login() {
 ```
 
 ### ForgotPassword
+This file allows us to enable a user to reset their password.
+This functionality is provided by Firebase, by means of an input (email) and a button (sending the firebase function) this makes the email that we have entered receive an email with a link to reset the password
+
 ```js
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
@@ -679,6 +682,7 @@ export function ResetPassword() {
 }
 ```
 ### Profile
+This file collects the data of the current user instance and displays them on a card in an attractive way for the user, it has a button that allows updating the data that when pressed renders the page to edit the user's profile
 ```js
 import { Home } from "./Home";
 import { useAuth } from "../context/authContext";
@@ -749,6 +753,11 @@ export function Profile() {
 }
 ```
 ### EditProfile
+This file allows us to update the user data, change the name (if this property does not exist or is null, it creates it), email (only when the user has authenticated with email and password) and profile picture.
+The functionality is provided to us by Firebase through data update functions.
+Here I leave the link of the Firebase documentation in case you want to take a look
+
+(https://firebase.google.com/docs/auth/web/manage-users?hl=es#web-version-9_3)
 ```js
 import { useAuth } from "../context/authContext";
 import { updateProfile, updateEmail } from "firebase/auth";
@@ -902,6 +911,7 @@ export function EditProfile() {
 }
 ```
 ### Alert
+This file allows you to display a message to the user for validations and errors that may cause some actions
 ```js 
 export function Alert({ message }) {
   return (
@@ -912,6 +922,8 @@ export function Alert({ message }) {
 }
 ```
 ### ProtectedRoutes  
+We will use this file to be able to protect all our routes so that they cannot be seen by non-logged in users, it will suffice to put this component in front of the declaration of the route.
+To understand it better, please take a look at the App.js file
 ```js 
 import { useAuth } from "../context/authContext";
 import { Navigate } from "react-router-dom";
@@ -924,6 +936,9 @@ export function ProtectedRoute({ children }) {
 ```
 ## Config
 ### firebase.config.js
+This file connects our application to the firebase database, it contains the necessary information to connect to the database, in it we declare the instances, RealTimeDatabase, Firestore, Storage.....
+This depends on what you want to use, in our case we will only need to instantiate the database and storage.
+We import the functions that Firebase provides us and we would already have the database connected to our project
 ```js 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -956,6 +971,7 @@ export { app, analytics, auth, storage };
 ```
 ## Context
 ### authContext.js
+This file contains the application context and all the functions that we are going to need in our application, we declare these functions in this file to have accessibility to them in any component and when we need it, keep in mind that we have to export the functions to be able to access them
 ```js 
   import { createContext, useContext, useEffect } from "react";
 import {
@@ -1022,6 +1038,7 @@ export function AuthProvider({ children }) {
 
 ```
 ## App.js
+In this file all the routes of the project and the file that contains the context are declared, this is the file that is executed when starting the server
 ```js
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./components/Home";
@@ -1062,6 +1079,7 @@ function App() {
 export default App;
 ```
 ## package.json
+In this file all the dependencies necessary for the project to work are saved, it serves so that we do not have to install dependency by dependency, but rather we execute npm i or npm install and it installs them at the same time
 ```js 
 {
   "name": "login-registro-firebase",
@@ -1114,6 +1132,9 @@ export default App;
 
 ```
 ## postcss.config.js
+This file is generated only with the following command:<br><br>
+npx tailwindcss init -p <br><br>
+No need to do any additional configuration<br><br>
 ```js 
 module.exports = {
   plugins: {
@@ -1123,7 +1144,11 @@ module.exports = {
 }
 ```
 ## tailwind.config.js
-```js 
+This file is generated only with the following command:<br><br>
+-npx tailwindcss init<br><br>
+Inside this file add the paths to all your template files<br><br>
+```js
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,js}"],
@@ -1134,7 +1159,6 @@ module.exports = {
 };
 
 ```
-
 
 
 #### To run this app in your pc
