@@ -150,6 +150,13 @@ Here we enable users to be authenticated with google
 # Code Explanation
 ## Components
 ### Inicio
+#### This class contains the necessary code to:
+##### -Get the current user who is logged in
+dkn
+##### -Show a letter with information of the current user
+jdbf
+
+
 ```js
 import { useAuth } from "../context/authContext";
 import { Home } from "./Home";
@@ -1132,11 +1139,12 @@ module.exports = {
 
 #### To run this app in your pc
 - [Download Node](https://nodejs.org/en/)<br><br>
--Install dependencies with : npm install
+
 git clone https://github.com/DevelopTomassm/React.git
 <br><br>
-cd to project location and cd backend folder<br><br>
-to run our server : nodemon start
+cd to project location and cd LoginRegistroFirebase folder<br><br>
+Open a terminal and run: npm install,this commmand install dependencies project<br><br>
+to run our server : npm start
 
 ### Live Demo
 
