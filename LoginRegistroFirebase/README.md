@@ -149,7 +149,7 @@ Here we enable users to be authenticated with google
 
 
 #### To run this app in your pc
-- [Download Node](https://nodejs.org/en/)
+- [Download Node](https://nodejs.org/en/)<br><br>
 -Install dependencies with : npm install
 git clone https://github.com/DevelopTomassm/React.git
 <br><br>
