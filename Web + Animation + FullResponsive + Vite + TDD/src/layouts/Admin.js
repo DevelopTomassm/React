@@ -1,14 +1,15 @@
+//Libraries imports
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-// components
+//Components imports
 
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import HeaderStats from "components/Headers/HeaderStats.js";
 import FooterAdmin from "components/Footers/FooterAdmin.js";
 
-// views
+//Views imports
 
 import Dashboard from "views/admin/Dashboard.js";
 import Maps from "views/admin/Maps.js";

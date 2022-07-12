@@ -1,8 +1,7 @@
+//Libraries imports
 import { useAuth } from "context/authContext";
 import React from "react";
-
-// components
-
+//Export function
 export default function CardProfile() {
   const { user } = useAuth();
   console.log(user);
@@ -20,7 +19,7 @@ export default function CardProfile() {
                 />
               </div>
             </div>
-            <div className="w-full px-4 text-center mt-2">
+            <div className="w-full px-4 text-center mt-12">
               <div className="flex justify-center py-4 lg:pt-4 pt-8">
                 <div className="mr-4 p-3 text-center">
                   <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">

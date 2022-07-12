@@ -1,14 +1,14 @@
-import UserDropdown from "components/Dropdowns/UserDropdown";
+//Libraries imports
 import { useAuth } from "context/authContext";
 import React, { useState } from "react";
-
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateProfile, updateEmail } from "firebase/auth";
+//Firebase config file import
 import { storage } from "config/firebase.config";
-// components
 
+//Export function
 export default function CardSettings() {
-  const { user, logout, loading } = useAuth();
+  const { user } = useAuth();
   console.log(user);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -134,12 +134,7 @@ export default function CardSettings() {
                   hidden=""
                   src={user.photoURL}
                   className=""
-                />
-                <input
-                  type="file"
-                  id="file-upload"
-                  name="file"
-                  class="hidden"
+                  onChange={handleImageChange}
                 />
               </div>
             </div>

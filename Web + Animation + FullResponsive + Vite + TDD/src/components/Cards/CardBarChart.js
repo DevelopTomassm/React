@@ -1,6 +1,7 @@
+//Libraries imports
 import React from "react";
 import Chart from "chart.js";
-
+//Export function
 export default function CardBarChart() {
   React.useEffect(() => {
     let config = {

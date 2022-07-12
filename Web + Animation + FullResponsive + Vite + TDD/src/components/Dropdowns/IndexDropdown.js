@@ -1,3 +1,4 @@
+//Libraries imports
 import React from "react";
 import { Link } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
@@ -111,5 +112,5 @@ const IndexDropdown = () => {
     </>
   );
 };
-
+//Export component
 export default IndexDropdown;

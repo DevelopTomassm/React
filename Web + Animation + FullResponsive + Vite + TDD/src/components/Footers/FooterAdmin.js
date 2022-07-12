@@ -1,6 +1,7 @@
+//Libraries imports
 import React from "react";
 import { Fade } from "react-reveal";
-
+//Export function
 export default function FooterAdmin() {
   return (
     <>
@@ -13,7 +14,7 @@ export default function FooterAdmin() {
                 <div className="text-sm text-blueGray-500 font-semibold py-1 text-center md:text-left">
                   Copyright © {new Date().getFullYear()}{" "}
                   <div className="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1">
-                    Eugenia Ortega.
+                    Tomas Salcedo
                   </div>
                 </div>
               </div>

@@ -1,9 +1,10 @@
+//Libraries imports
 import React from "react";
 
-// components
+//Components imports
 
 import CardStats from "components/Cards/CardStats.js";
-
+//Export function
 export default function HeaderStats() {
   return (
     <>

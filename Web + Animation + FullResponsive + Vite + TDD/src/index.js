@@ -1,19 +1,18 @@
+//Libraries imports 
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
 
-// layouts
+// Layouts imports
 
 import Admin from "layouts/Admin.js";
 import Auth from "layouts/Auth.js";
-
-// views without layouts
-
+//Views imports 
 import Landing from "views/Landing.js";
 import Profile from "views/Profile.js";
+//Context function import
 import { AuthProvider } from "context/authContext";
 
 ReactDOM.render(

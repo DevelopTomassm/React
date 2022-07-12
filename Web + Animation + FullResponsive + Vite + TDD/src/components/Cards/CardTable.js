@@ -1,3 +1,4 @@
+//Libraries imports
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -9,8 +10,9 @@ import {
 import { uid } from "uid";
 import { onValue, ref, remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
+//Firebase config file import
 import { db } from "../../config/firebase.config";
-// components
+//Export function
 
 export default function CardTable({ color }) {
   const [nombre, setNombre] = useState("");
@@ -295,7 +297,7 @@ export default function CardTable({ color }) {
                             <>
                               <button
                                 className="rounded-full w-10 h-10 drop-shadow-3xl bg-red-500 text-white hover:bg-white hover:text-red-500 flex employes-center justify-center mr-4"
-                                onClick={writeToDatabase}
+                                onClick={handleUpdate(employe)}
                               >
                                 <SaveIcon className="w-5" />
                               </button>

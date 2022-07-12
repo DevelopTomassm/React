@@ -1,3 +1,4 @@
+//Libraries imports
 import React from "react";
 import { createPopper } from "@popperjs/core";
 
@@ -66,5 +67,5 @@ const NotificationDropdown = () => {
     </>
   );
 };
-
+//Export component
 export default NotificationDropdown;

@@ -1,10 +1,10 @@
-/*eslint-disable*/
+//Libraries imports
 import React from "react";
 import { Link } from "react-router-dom";
-
+//Components imports
 import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "components/Dropdowns/UserDropdown.js";
-
+//Export function
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   return (

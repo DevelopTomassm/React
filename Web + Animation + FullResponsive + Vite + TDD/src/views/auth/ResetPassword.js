@@ -1,8 +1,12 @@
+//Libraries imports
 import React, { useState } from "react";
-import { Alert } from "components/Utils/Alert";
-import { useAuth } from "context/authContext";
 import { useHistory } from "react-router";
 import { Fade } from "react-reveal";
+//Components imports
+import { Alert } from "components/Utils/Alert";
+//Context function import
+import { useAuth } from "context/authContext";
+//Export function
 export default function ResetPassword() {
   const [user, setUser] = useState({
     email: "",

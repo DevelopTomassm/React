@@ -1,8 +1,10 @@
+//Libraries imports
 import React from "react";
 import { createPopper } from "@popperjs/core";
-import { useAuth } from "context/authContext";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+//Context function import
+import { useAuth } from "context/authContext";
 
 const UserDropdown = () => {
   // dropdown props
@@ -75,5 +77,5 @@ const UserDropdown = () => {
     </>
   );
 };
-
+//Export component
 export default UserDropdown;

@@ -1,10 +1,11 @@
+//Libraries imports
 import React from "react";
 
-// components
+//Components imports
 
 import CardSettings from "components/Cards/CardSettings.js";
 import CardProfile from "components/Cards/CardProfile.js";
-
+//Export function
 export default function Settings() {
   return (
     <>

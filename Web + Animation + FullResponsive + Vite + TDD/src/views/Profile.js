@@ -1,10 +1,12 @@
+//Libraries imports
 import React from "react";
-
+import { Link } from "react-router-dom";
+//Components imports
 import Navbar from "components/Navbars/IndexNavbar";
 import Footer from "components/Footers/Footer.js";
+//Context function import
 import { useAuth } from "context/authContext";
-import { Link } from "react-router-dom";
-
+//Export function
 export default function Profile() {
   const { user } = useAuth();
   console.log(user);
@@ -69,7 +71,7 @@ export default function Profile() {
                       </div>
                     </div>
                   </div>
-                  <div className="w-full lg:w-4/12 px-4 lg:order-1">
+                  <div className="w-full lg:w-4/12 px-12 lg:order-1">
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
                       <div className="mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">

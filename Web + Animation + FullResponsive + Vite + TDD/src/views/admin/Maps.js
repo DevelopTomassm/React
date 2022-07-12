@@ -1,9 +1,10 @@
+//Libraries imports
 import React from "react";
 
-// components
+//Components imports
 
 import MapExample from "components/Maps/MapExample.js";
-
+//Export function
 export default function Maps() {
   return (
     <>

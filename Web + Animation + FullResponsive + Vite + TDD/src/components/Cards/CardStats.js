@@ -1,6 +1,7 @@
+//Libraries imports
 import React from "react";
 import PropTypes from "prop-types";
-
+//Export function
 export default function CardStats({
   statSubtitle,
   statTitle,

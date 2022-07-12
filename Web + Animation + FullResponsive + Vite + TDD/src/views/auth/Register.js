@@ -1,10 +1,13 @@
-import { Alert } from "components/Utils/Alert";
-import { useAuth } from "context/authContext";
+//Libraries import
 import React, { useState } from "react";
 import { Fade } from "react-reveal";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-
+//Components imports
+import { Alert } from "components/Utils/Alert";
+//Context function import
+import { useAuth } from "context/authContext";
+//Export function
 export default function Register() {
   const [user, setUser] = useState({
     email: "",

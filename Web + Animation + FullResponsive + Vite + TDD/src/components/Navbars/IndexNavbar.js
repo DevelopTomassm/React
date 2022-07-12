@@ -1,8 +1,9 @@
-/*eslint-disable*/
-import UserDropdown from "components/Dropdowns/UserDropdown";
+//Libraries imports
 import React from "react";
 import { Link } from "react-router-dom";
-
+//Components imports
+import UserDropdown from "components/Dropdowns/UserDropdown";
+//Export function
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (

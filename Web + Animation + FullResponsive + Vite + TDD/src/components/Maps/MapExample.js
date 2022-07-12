@@ -1,6 +1,8 @@
+//Libraries imports
 import React from "react";
 
-function MapExample() {
+//Export component
+export default function MapExample() {
   const mapRef = React.useRef(null);
   React.useEffect(() => {
     let google = window.google;
@@ -86,5 +88,3 @@ function MapExample() {
     </>
   );
 }
-
-export default MapExample;

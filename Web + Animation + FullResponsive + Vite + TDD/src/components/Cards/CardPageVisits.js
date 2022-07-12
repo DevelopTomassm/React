@@ -1,6 +1,6 @@
+//Libraries imports
 import React from "react";
-
-// components
+//Export function
 
 export default function CardPageVisits() {
   return (

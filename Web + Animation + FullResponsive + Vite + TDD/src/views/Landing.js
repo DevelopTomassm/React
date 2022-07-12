@@ -1,17 +1,19 @@
+//Libraries imports
 import React, { useEffect, useState } from "react";
 import emailjs from "emailjs-com";
-
-// components
+import { onValue, ref } from "firebase/database";
+import { Fade } from "react-reveal";
+//Firebase config file import
+import { db } from "config/firebase.config";
+//Context function import
+import { useAuth } from "context/authContext";
+//Components imports
 
 import Navbar from "components/Navbars/AuthNavbar.js";
 import Navbar2 from "components/Navbars/LandingNavbar";
 import Footer from "components/Footers/Footer.js";
-import { useAuth } from "context/authContext";
-import { Fade } from "react-reveal";
-import { onValue, ref } from "firebase/database";
 
-import { db } from "config/firebase.config";
-
+//Export function
 export default function Landing() {
   const { user } = useAuth();
   console.log(user);

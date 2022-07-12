@@ -1,9 +1,10 @@
+//Libraries imports
 import React from "react";
-
+import { Link } from "react-router-dom";
+//Components imports
 import UserDropdown from "components/Dropdowns/UserDropdown.js";
 
-import { Link } from "react-router-dom";
-
+//Export function
 export default function Navbar() {
   return (
     <>
